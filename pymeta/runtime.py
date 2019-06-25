@@ -8,6 +8,12 @@ class ParseError(Exception):
     ?Redo from start
     """
 
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+        self.args = args
+        if len(args) > 2:
+            self.message = args[2]
+
     @property
     def position(self):
         return self.args[0]
@@ -15,11 +21,6 @@ class ParseError(Exception):
     @property
     def error(self):
         return self.args[1]
-
-    def __init__(self, *a):
-        Exception.__init__(self, *a)
-        if len(a) > 2:
-            self.message = a[2]
 
     def __getitem__(self, item):
         return self.args[item]
@@ -581,7 +582,7 @@ class OMetaBase(object):
         while True:
             try:
                 c, e = self.rule_anything()
-            except ParseError as e:
+            except ParseError:
                 endchar = None
                 break
             if c in endChars and len(stack) == 0:
