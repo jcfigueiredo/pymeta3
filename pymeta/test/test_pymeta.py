@@ -1,5 +1,5 @@
 from textwrap import dedent
-from twisted.trial import unittest
+import unittest
 from pymeta.runtime import ParseError, OMetaBase, EOFError, expected
 from pymeta.boot import BootOMetaGrammar
 from pymeta.builder import TreeBuilder, moduleFromGrammar
@@ -803,10 +803,13 @@ class MakeGrammarTest(unittest.TestCase):
         grammar = """
         andHandler ::= <handler>:h1 'and' <handler>:h2 => And(h1, h2)
         """
-        e = self.assertRaises(ParseError, OMeta.makeGrammar, grammar, {})
-        self.assertEquals(e.position, 39)
-        self.assertEquals(e.error, [("expected", "token", "'")])
 
+        try:
+            OMeta.makeGrammar(grammar, {})
+        except ParseError as e:
+            self.assertEquals(e.position, 39)
+            self.assertEquals(e.error, [("expected", "token", "'")])
+        self.fail('should\v raised')
 
     def test_subclassing(self):
         """
