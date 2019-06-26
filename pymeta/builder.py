@@ -323,4 +323,5 @@ def moduleFromGrammar(tree, className, superclass, globalsDict):
     mod.__dict__[className].globals = fullGlobals
     sys.modules[modname] = mod
     linecache.getlines(filename, mod.__dict__)
+    import ipdb; ipdb.set_trace();
     return mod.__dict__[className]

@@ -125,7 +125,7 @@ class OMetaTestCase(unittest.TestCase):
         Input matches can be made on a sequence of patterns.
         """
         g = self.compile("twelve ::= '1' '2'")
-        self.assertEqual(g.twelve("12"), "2");
+        self.assertEqual(g.twelve("12"), "2")
         self.assertRaises(ParseError, g.twelve, "1")
 
 

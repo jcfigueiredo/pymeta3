@@ -10,6 +10,10 @@ class ParseError(Exception):
 
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+        # if args[1] is None:
+        #     print(args)
+        # #     import ipdb; ipdb.set_trace();
+
         self.args = args
         if len(args) > 2:
             self.message = args[2]
@@ -95,7 +99,7 @@ def joinErrors(errors):
     """
     def get_key(item):
         val = item[0]
-        if val == None:
+        if val is None:
             val = -1000000000
         return val
     errors.sort(reverse=True, key=get_key)
@@ -309,6 +313,9 @@ class OMetaBase(object):
         @param ruleName: The name of the rule invoked.
         @param args: A sequence of arguments to it.
         """
+        # print(ruleName)
+        # if ruleName == 'dig':
+        #     import ipdb; ipdb.set_trace();
         if args:
             if rule.__code__.co_argcount - 1 != len(args):
                 for arg in args[::-1]:
