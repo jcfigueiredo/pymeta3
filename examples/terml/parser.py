@@ -153,7 +153,7 @@ def Term(functor, argList):
 
 def numberType(n):
     try:
-        int_types = (long, int)
+        int_types = (int, int)
     except NameError:
         int_types = (int,)
         
@@ -206,5 +206,5 @@ def parseTerm(termString):
     try:
         return _parseTerm(termString)
     except ParseError as e:
-        print(e.formatError(termString))
+        print((e.formatError(termString)))
         raise

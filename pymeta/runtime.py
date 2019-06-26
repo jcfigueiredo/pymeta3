@@ -67,9 +67,7 @@ class ParseError(Exception):
                 lineNo += 1
         reason = self.formatReason()
         return ('\n' + line + '\n' + (' ' * columnNo + '^') +
-                "\nParse error at line %s, column %s: %s\n" % (lineNo,
-                                                               columnNo,
-                                                               reason))
+                f"\nParse error at line {lineNo}, column {columnNo}: {reason}\n")
 
 class EOFError(ParseError):
     def __init__(self, position):
@@ -129,7 +127,7 @@ class character(str):
 
 try:
     _has_unicode = True
-    class unicodeCharacter(unicode):
+    class unicodeCharacter(str):
         """
         Type to distinguish characters from Unicode strings.
         """
@@ -153,7 +151,7 @@ class InputStream(object):
         """
         if isinstance(iterable, str):
             data = [character(c) for c in iterable]
-        elif _has_unicode and isinstance(iterable, unicode):
+        elif _has_unicode and isinstance(iterable, str):
             data = [unicodeCharacter(c) for c in iterable]
         else:
             data = list(iterable)

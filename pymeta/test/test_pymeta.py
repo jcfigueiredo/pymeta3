@@ -358,7 +358,7 @@ class OMetaTestCase(unittest.TestCase):
         """)
         self.assertEqual(g.interp([['3', '+', ['5', '*', '2']]]), 13)
         try:
-            self.assertEqual(g.interp([[u'3', u'+', [u'5', u'*', u'2']]]), 13)
+            self.assertEqual(g.interp([['3', '+', ['5', '*', '2']]]), 13)
         except SyntaxError:
             # Python 3.0-3.2
             pass

@@ -43,8 +43,8 @@ class RuntimeTests(unittest.TestCase):
         data = "foo"
         o = OMetaBase(data)
         e = self.assertRaises(ParseError, o.rule_exactly, "g")
-        self.assertEquals(e[1], expected(None, "g"))
-        self.assertEquals(e[0], 0)
+        self.assertEqual(e[1], expected(None, "g"))
+        self.assertEqual(e[0], 0)
 
 
 
